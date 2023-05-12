@@ -1,86 +1,167 @@
-@charset "UTF-8";
-*{
-	margin: 0;
-	padding:0;
+/* style.css */
+
+/* 전체 페이지 스타일 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
 }
-/* 화면 전체 렙 */
-.wrapper{
-	width: 1900px;
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
 }
-/* content 랩 */
-.wrap{
-	width : 1080px;
-	margin: auto;
+
+/* 헤더 스타일 */
+header {
+    background-color: #f1f1f1;
+    padding: 10px;
 }
-/* 홈페이지 기능 네비 */ 
-.top_gnb_area{
-	width: 100%;
-    height: 50px;
-    background-color: #a2a2ea;
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
-/* 로고, 검색, 로그인 */
-.top_area{
-	width: 100%;
-    height: 150px;
-    /* background-color: #f7f0b9; */
-}
-/* 로고 영역 */
-.logo_area{
-	width: 25%;
-	height: 100%;
-	background-color: red;
-	float:left;
-}
-/* 검색 박스 영역 */
-.search_area{
-	width: 50%;
-	height: 100%;
-	background-color: yellow;
-	float:left;	
-}
-/* 로그인 버튼 영역 */
-.login_area{
-	width: 25%;
-	height: 100%;
-	display: inline-block;	
-	text-align: center;		
-}
-.login_button{
-	height: 50%;
-    background-color: #D4DFE6;
-    margin-top: 30px;
-    line-height: 77px;
-    font-size: 40px;
-    font-weight: 900;
-    border-radius: 10px;
-    cursor: pointer;	
-}
-.login_area>span{
-	margin-top: 10px;
-    font-weight: 900;
+
+nav ul li {
     display: inline-block;
-}
-.login_button{
-	height : 50%;
-	background-color: #D4DFE6;
-	margin-top:30px;
+    margin-right: 10px;
 }
 
-/* 제품 목록 네비 */
-.navi_bar_area{
-	width: 100%;
-    height: 70px;
-    background-color: #7696fd;
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    padding: 5px;
 }
 
-/* 홈페이지 메인 제품 목록  */
-.content_area{
-	width: 100%;
-    background-color: #97ef97;
-    height: 1000px;
+/* 메인 섹션 스타일 */
+.main-section {
+    background-color: #f9f9f9;
+    padding: 50px 0;
+    text-align: center;
 }
 
-/* float 속성 해제 */
-.clearfix{
-	clear: both;
+.main-section h1 {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.main-section p {
+    font-size: 18px;
+    color: #666;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+/* 서비스 섹션 스타일 */
+.service-section {
+    padding: 50px 0;
+    text-align: center;
+}
+
+.service-section h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.service-item {
+    display: inline-block;
+    width: 30%;
+    padding: 20px;
+    margin: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.service-item img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+}
+
+.service-item h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.service-item p {
+    font-size: 14px;
+    color: #666;
+}
+
+/* 소개 섹션 스타일 */
+.intro-section {
+    background-color: #f9f9f9;
+    padding: 50px 0;
+    text-align: center;
+}
+
+.intro-section h2 {
+    font-size: 24px;
+    font
+
+
+/* style.css (계속) */
+
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.intro-section p {
+    font-size: 14px;
+    color: #666;
+}
+
+/* 문의 섹션 스타일 */
+.contact-section {
+    padding: 50px 0;
+    text-align: center;
+}
+
+.contact-section h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.contact-section p {
+    font-size: 14px;
+    color: #666;
+}
+
+.contact-section .button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+/* 푸터 스타일 */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+footer p {
+    font-size: 14px;
+    margin: 0;
 }
