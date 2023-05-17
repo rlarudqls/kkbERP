@@ -42,7 +42,7 @@
 	<jsp-config>
 		<jsp-property-group>
 			<url-pattern>*.jsp</url-pattern>
-			<include-prelude>/WEB-INF/views/common/tag.jsp</include-prelude>
+			<include-prelude>/WEB-INF/views/kkb_common_file/tag.jsp</include-prelude>
 		</jsp-property-group>
 	</jsp-config>
 </web-app>
