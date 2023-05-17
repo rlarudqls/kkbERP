@@ -31,7 +31,7 @@
 
 	<!-- Dao 인터페이스를 스캔해서 Dao 구현객체를 생성하고, 스프링의 빈으로 등록 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.kkbERP.DAOdatabase" />
+		<property name="basePackage" value="com.kkbERP.erp.dao" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
 
@@ -42,7 +42,7 @@
 	<context:annotation-config />
 
 	<!-- 지정된 패키지에서 @Service가 부착된 클래스를 스프링의 빈으로 등록 -->
-	<context:component-scan base-package="com.kkbERP.serviceDB" />
+	<context:component-scan base-package="com.kkbERP.erp.service" />
 
 	<!-- WebSocket 설정 -->
 	<bean id="messageNotificationHandler" class="com.kkbERP.erp.web.socket.MessageNotificationSocketHandler" />
