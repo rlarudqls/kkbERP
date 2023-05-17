@@ -1,27 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
-	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
-	    
-	    <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig"> 
-        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property> 
-        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/kkbERP?serverTimezone=Asia/Seoul"></property> 
-        <property name="username" value="root"></property> 
-        <property name="password" value="1234"></property> 
-    </bean> 
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="datasource"></property>
-    </bean>   
-    <bean id="datasource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close"> 
-        <constructor-arg ref="hikariConfig"></constructor-arg> 
-    </bean>  
-	<!-- Root Context: defines shared resources visible to all other web components -->
-		
-		   <mybatis-spring:scan base-package="com.kkbERP.DAOdatabase"/>
-    <context:component-scan base-package="com.kkbERP.VOmodel"></context:component-scan>
-    <context:component-scan base-package="com.kkbERP.serviceDB"></context:component-scan>
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.3.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+	<!-- Connection Pool 스프링 빈으로 등록 -->
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
+		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/kkbERP?serverTimezone=Asia/Seoul" />
+		<property name="username" value="root" />
+		<property name="password" value="1234" />
+	</bean>
+
+	<!-- 트랜잭션 매니저 스프링 빈으로 등록 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- MyBatis 설정 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- Dao 인터페이스를 스캔해서 Dao 구현객체를 생성하고, 스프링의 빈으로 등록 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.kkbERP.DAOdatabase" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+	</bean>
+
+	<!-- 트랜잭션 처리가 필요한 곳에 @Transactional 어노테이션을 부착하면 스프링이 트랜잭션 처리를 자동으로 수행 -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<!-- 의존성 주입 관련 어노테이션을 감지하고, 적절한 처리를 수행하는 스프링의 xxxAnnotationProcessor 객체 빈으로 등록 -->
+	<context:annotation-config />
+
+	<!-- 지정된 패키지에서 @Service가 부착된 클래스를 스프링의 빈으로 등록 -->
+	<context:component-scan base-package="com.kkbERP.serviceDB" />
+
+	<!-- WebSocket 설정 -->
+	<bean id="messageNotificationHandler" class="com.kkbERP.erp.web.socket.MessageNotificationSocketHandler" />
+
+	<websocket:handlers>
+		<websocket:mapping handler="messageNotificationHandler" path="/alarm.erp" />
+		<websocket:handshake-interceptors>
+			<bean class="com.kkbERP.erp.web.socket.HandshakeInterceptor" />
+		</websocket:handshake-interceptors>
+	</websocket:handlers>
 </beans>
