@@ -9,7 +9,18 @@
 			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
 		</layout>
 	</appender>
-	
+
+	<!-- 로그 파일 Appender 추가 -->
+    <appender name="file" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="logs/application.log" />
+        <param name="Append" value="true" />
+        <param name="MaxFileSize" value="10MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%-5p: %d [%t] %c{1} - %m%n" />
+        </layout>
+    </appender>
+
 	<!-- Application Loggers -->
 	<logger name="com.kkbERP.controller">
 		<level value="info" />
