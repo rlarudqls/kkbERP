@@ -57,7 +57,7 @@
 	    
 	    <ul class="nav navbar-nav navbar-right">
 	      <li><a href="/my/my.erp">내 정보</a></li>
-	      <li><a href="/logout.erp">회원가입</a></li>
+	      <li><a href="/logout.erp">로그아웃</a></li>
 	    </ul>
 	    
   	</div>
